@@ -4,18 +4,22 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import agent from "../../app/api/agent";
 import { LoadingButton } from "@mui/lab";
+import { useStoreContext } from "../../app/context/StoreContext";
 interface Props {
     product: Product;
 }
 export default function ProductCard({ product }: Props) {
     const [loading, setLoading] = useState(false);
+    const { setBasket } = useStoreContext();
 
-    function handleAddItem(productId: number) {
+
+    function handleAddItem(productId: number, quantity = 1) {
         setLoading(true);
-        agent.Basket.addItem(productId)
+        agent.Basket.addItem(productId, quantity)
+            .then(basket => setBasket(basket))
             .catch(error => console.log(error))
             .finally(() => setLoading(false))
-    }
+    };
 
     return (
         <Card>
@@ -44,7 +48,7 @@ export default function ProductCard({ product }: Props) {
                 </Typography>
             </CardContent>
             <CardActions>
-                <LoadingButton loading={loading} onClick={() => handleAddItem(product.id)} size="small">Add to cart</LoadingButton loading={loading}>
+                <LoadingButton loading={loading} onClick={() => handleAddItem(product.id)} size="small">Add to cart</LoadingButton>
                 <Button component={Link} to={`/catalog/${product.id}`} size="small">View</Button>
             </CardActions>
         </Card>

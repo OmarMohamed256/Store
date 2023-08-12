@@ -1,4 +1,3 @@
-import { ContactPage } from "@mui/icons-material";
 import { createBrowserRouter, Navigate } from "react-router-dom";
 import AboutPage from "../../features/about/AboutPage";
 import Catalog from "../../features/catalog/Catalog";
@@ -9,6 +8,7 @@ import App from "../layout/App";
 import NotFound from "../errors/NotFound";
 import BasketPage from "../../features/basket/BasketPage";
 import CheckoutPage from "../../features/checkout/CheckoutPages";
+import ContactPage from "../../features/contact/ContactPage";
 
 export const router = createBrowserRouter([
     {

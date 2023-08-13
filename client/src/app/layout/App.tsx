@@ -1,11 +1,11 @@
+import { Container, createTheme, CssBaseline, ThemeProvider } from "@mui/material";
 import { useEffect, useState } from "react";
-import { Container, CssBaseline, ThemeProvider, createTheme } from "@mui/material";
 import { Outlet } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import Header from "./Header";
 import 'react-toastify/dist/ReactToastify.css';
-import agent from "../api/agent";
 import { getCookie } from "../util/util";
+import agent from "../api/agent";
 import LoadingComponent from "./LoadingComponent";
 import { useAppDispatch } from "../store/configureStore";
 import { setBasket } from "../../features/basket/basketSlice";
@@ -40,13 +40,14 @@ function App() {
   function handleThemeChange() {
     setDarkMode(!darkMode);
   }
-  if (loading) return <LoadingComponent message="Initialising app..." />
 
+  if (loading) return <LoadingComponent message="Initialising app..." />
+  
   return (
     <ThemeProvider theme={theme}>
       <ToastContainer position="bottom-right" hideProgressBar theme="colored" />
       <CssBaseline />
-      <Header darkMode={darkMode} handleThemeChange={handleThemeChange} />
+      <Header darkMode={darkMode} handleThemeChange={handleThemeChange}  />
       <Container>
         <Outlet />
       </Container>
